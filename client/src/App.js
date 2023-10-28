@@ -1,21 +1,28 @@
-import { useState } from "react";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import Signup from "./components/signup/Signup";
-import Login from "./components/login/Login";
-import Home from "./components/home/Home";
-import Intro from "./components/Intro/Intro";
+import { Navbar } from "./components/Navbar/navbar";
+import Login from "./components/Login/Login";
+import TakeaTest from "./components/TakeATest/TakeATest";
+import Home from "./components/Home/Home";
+import About from "./components/About/About";
+import Signup from "./components/Signup/Signup";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Intro />}></Route>
-        <Route path='/register' element={<Signup />}></Route>
-        <Route path='/login' element={<Login />}></Route>
-        <Route path='/home' element={<Home />}></Route>
-      </Routes>
+      <div>
+        <Navbar />
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/takeatest" element={<TakeaTest />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
