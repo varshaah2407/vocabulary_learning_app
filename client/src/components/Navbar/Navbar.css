@@ -10,8 +10,11 @@ nav {
   align-items: center;
   background-color: #59a4ad;
   color: white;
-  position: sticky;
+  position: fixed; /* Change this to fixed */
   top: 0;
+  width: 100%; /* Make it full-width */
+  z-index: 1000;
+  /* Add z-index to ensure it's above other content */
 }
 
 nav ul {

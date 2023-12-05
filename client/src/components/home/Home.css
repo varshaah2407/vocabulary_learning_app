@@ -1,4 +1,29 @@
-.quoteImage {
-  height: fit-content;
-  width: min-content;
+/* .quoteImage {
+  height: 50%;
+  width: 50%;
+} */
+
+.image-container {
+  display: flex;
+}
+
+.background-image {
+  width: 100%; /* Set the width to 100% */
+  max-height: 95vh; /* Adjust the max-height as needed */
+  display: block;
+}
+
+.overlay-button {
+  position: absolute;
+  top: 80%; /* Adjust as needed */
+  left: 75%; /* Center-align the button */
+  padding: 10px 20px;
+  background-color: #db3434; /* Adjust button styles as needed */
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  width: 200px;
+  font-weight: 800px;
 }
