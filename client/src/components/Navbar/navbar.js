@@ -29,7 +29,7 @@ export const Navbar = () => {
           <NavLink to="/TakeaTest">Take a Test</NavLink>
         </li>
         <li>
-          <NavLink to="/Login">Login in</NavLink>
+          <NavLink to="/Login">Login</NavLink>
         </li>
       </ul>
     </nav>

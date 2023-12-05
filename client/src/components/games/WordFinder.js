@@ -9,7 +9,7 @@ const WordFinder = () => {
   const [displayWord, setDisplayWord] = useState(false);
   const [wrongGuesses, setWrongGuesses] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-
+  console.log(wordData, chosenLetters, displayWord, wrongGuesses);
   const fetchWordData = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -25,7 +25,7 @@ const WordFinder = () => {
       //console.log(data);
       if (Array.isArray(filteredData) && filteredData.length > 0) {
         let abc = Math.floor(Math.random() * filteredData.length);
-        setWordData({ ...data[abc] });
+        setWordData({ ...data[abc], Word: data[abc].Word.toLowerCase() });
       } else {
         setWordData(null);
       }
@@ -81,7 +81,7 @@ const WordFinder = () => {
   };
 
   const displayLettersFunction = () => {
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const letters = "abcdefghijklmnopqrstuvwxyz";
 
     return Array.from(letters).map((letter, index) => (
       <button
@@ -92,7 +92,7 @@ const WordFinder = () => {
           chosenLetters.includes(letter) ? "selected" : ""
         }`}
       >
-        {letter}
+        {letter.toUpperCase()}
       </button>
     ));
   };
@@ -128,7 +128,7 @@ const WordFinder = () => {
                   chosenLetters.includes(letter) ? "visible" : ""
                 }`}
               >
-                {chosenLetters.includes(letter) ? letter : ""}
+                {chosenLetters.includes(letter) ? letter.toUpperCase() : ""}
               </div>
             ))}
           </div>
