@@ -58,6 +58,7 @@
   border: 5px solid #aa8345;
   margin: 0 auto; /* Center-align the element horizontally */
   opacity: 0.5;
+  border-radius: 3px;
 }
 .footer {
   text-align: center;
