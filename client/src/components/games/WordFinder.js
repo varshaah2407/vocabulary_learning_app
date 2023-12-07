@@ -9,7 +9,7 @@ const WordFinder = () => {
   const [displayWord, setDisplayWord] = useState(false);
   const [wrongGuesses, setWrongGuesses] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-
+  console.log(wordData, chosenLetters, displayWord, wrongGuesses);
   const fetchWordData = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -25,7 +25,7 @@ const WordFinder = () => {
       //console.log(data);
       if (Array.isArray(filteredData) && filteredData.length > 0) {
         let abc = Math.floor(Math.random() * filteredData.length);
-        setWordData({ ...data[abc] });
+        setWordData({ ...data[abc], Word: data[abc].Word.toLowerCase() });
       } else {
         setWordData(null);
       }
@@ -81,7 +81,7 @@ const WordFinder = () => {
   };
 
   const displayLettersFunction = () => {
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const letters = "abcdefghijklmnopqrstuvwxyz";
 
     return Array.from(letters).map((letter, index) => (
       <button
@@ -92,7 +92,7 @@ const WordFinder = () => {
           chosenLetters.includes(letter) ? "selected" : ""
         }`}
       >
-        {letter}
+        {letter.toUpperCase()}
       </button>
     ));
   };
@@ -115,68 +115,73 @@ const WordFinder = () => {
   };
 
   return (
-    <div className="container">
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : wordData && wordData.Word ? (
-        <div>
-          <div className="word-container">
-            {Array.from(wordData.Word).map((letter, index) => (
-              <div
-                key={index}
-                className={`letter ${
-                  chosenLetters.includes(letter) ? "visible" : ""
-                }`}
-              >
-                {chosenLetters.includes(letter) ? letter : ""}
+    <div className="super">
+      <div className="container">
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : wordData && wordData.Word ? (
+          <div>
+            <div className="word-container">
+              {Array.from(wordData.Word).map((letter, index) => (
+                <div
+                  key={index}
+                  className={`letter ${
+                    chosenLetters.includes(letter) ? "visible" : ""
+                  }`}
+                >
+                  {chosenLetters.includes(letter) ? letter.toUpperCase() : ""}
+                </div>
+              ))}
+            </div>
+            <p className="word-description">Meaning: {wordData.Meaning}</p>
+            {msg && (
+              <div className="message">
+                <p>{msg}</p>
+                {displayWord && <p>Correct word was: {wordData.Word}</p>}
               </div>
-            ))}
-          </div>
-          <p className="word-description">Hint: {wordData.Meaning}</p>
-          {msg && (
-            <div className="message">
-              <p>{msg}</p>
-              {displayWord && <p>Correct word was: {wordData.Word}</p>}
-            </div>
-          )}
-          <div className="button-section">
-            <div className="guess-section">
-              <button onClick={restartGameFunction} className="restart-button">
-                Restart
-              </button>
-              <button
-                onClick={removeCharacterFunction}
-                disabled={!chosenLetters.length}
-                className="remove-button"
-              >
-                Remove Letter
-              </button>
-            </div>
-            <div className="letter-selection">{displayLettersFunction()}</div>
-            <div className="hints">
-              Hints Remaining: {hints}{" "}
-              <button
-                onClick={hintFunction}
-                disabled={hints === 0}
-                className="hint-button"
-              >
-                Get Hint
-              </button>
-            </div>
-            {!msg && (
-              <button
-                onClick={guessFunction}
-                disabled={!chosenLetters.length}
-                className="guess-button"
-              >
-                Guess
-              </button>
             )}
+            <div className="button-section">
+              <div className="guess-section">
+                <button
+                  onClick={restartGameFunction}
+                  className="restart-button"
+                >
+                  Restart
+                </button>
+                <button
+                  onClick={removeCharacterFunction}
+                  disabled={!chosenLetters.length}
+                  className="remove-button"
+                >
+                  Remove Letter
+                </button>
+              </div>
+              <div className="letter-selection">{displayLettersFunction()}</div>
+              <div className="hints">
+                Hints Remaining: {hints}{" "}
+                <button
+                  onClick={hintFunction}
+                  disabled={hints === 0}
+                  className="hint-button"
+                >
+                  Get Hint
+                </button>
+              </div>
+              {!msg && (
+                <button
+                  onClick={guessFunction}
+                  disabled={!chosenLetters.length}
+                  className="guess-button"
+                >
+                  Guess
+                </button>
+              )}
+            </div>
           </div>
-        </div>
-      ) : (
-        <p>No data available</p>
-      )}
+        ) : (
+          <p>No data available</p>
+        )}
+      </div>
     </div>
   );
 };
